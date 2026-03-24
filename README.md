@@ -183,7 +183,7 @@
 
 ## MOSTRANDO LOS INDICES CREADOS ANTERIORMENTE EN MUESTRA INTERFAZ DE MONGO COMPASS
 ![INDICES](./IMG/indecesMongoCompass.png)
-1[indices](./IMG/indecesMongoCompass2.png)
+![indices](./IMG/indecesMongoCompass2.png)
 
 ### LISTAR INDICES
 *Para poder listar nuestros índices en la consola de mongo podemos utilizar el comando db.<nombre_coleccion>.getIndices*
