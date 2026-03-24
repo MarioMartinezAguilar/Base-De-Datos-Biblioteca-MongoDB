@@ -1,0 +1,22 @@
+--Primeros Comandos en MongoDB
+1.mongod -> Inicia el servidor de base de datos de MongoDB.
+2.mongo -> Permite conectarnos al servidor de MongoDB cuando este ya ha iniciado, este comando solo aplica en versiones anteriores.
+3.mongosh -> Permite conectarnos al servidor de MongoDB cuando ha iniciado, este comando solo aplica para versiones recientes.
+4.db -> Comando que permite decirnos en que base de datos estamos actualmente.
+5.show dbs -> Comando que nos permite ver todas las bases de datos que tenemos disponibles.
+6.cls -> Comando que permite limpiar la consola de MongoDB.
+7.db.help() -> Muestra los métodos que podemos utilizar en MongoDB como comando de ayuda.
+8. use <nombre_de_la_BD> -> Este comando nos permite usar una base de datos existente si no existe la crea.
+9. db.dropDatabase() -> Este comando elimina una base de datos existente elimina la que estemos usando.
+
+*****************Comandos Para Colecciones*****************
+1.db.createCollection("nombre colección") -> Este comando permite crear una colección en la base de datos.
+2.show collections -> Permite ver todas las colecciones creadas en la base de datos.
+3.db.<nombre colección>.drop() -> Elimina una colección de la base de datos.
+
+*****************Comandos Para Documentos*****************
+1.db.<nombre colección>.insertOne({})-> Comando para insertar un documento en la colección.
+2.db.<nombre colección>.find() -> Permite ver los documentos insertados en la colección.
+3.db.<nombre colección>.find().pretty() -> Comando que nos muestra los documentos insertados en una colección pero con el método pretty() nos ayuda a visualizarlos mejor en la consola de MongoDB.
+4.db.<nombre colección>.count() -> Comando utilizando el método count() nos permite saber el total de documentos insertados en una colección.
+
