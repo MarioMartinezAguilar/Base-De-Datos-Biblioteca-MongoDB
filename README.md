@@ -20,11 +20,11 @@
 
 ![MONGO](./IMG/showCollections.png)
 
-## INSECION DE DATOS UTILIZANDO INSERTONE Y INSERTMANY
+## INSERCIÓN DE DATOS UTILIZANDO INSERTONE Y INSERTMANY
 **Utilizamos las operaciones de inserción InsertOne e InsertMany para insertar documentos en nuestra base de datos ya sea uno solo o múltiples documentos para ello tenemos aquí en nuestro repositorio una carpeta llamada `INSERT` que contiene 2 archivos JavaScript:`insertOne.js` y `insertMany.js` donde tengo las inserciones de cada una de nuestras colecciones explicadas detalladamente de nuestro proyecto**
-## MOSTRANDO INSERCCIONES EN NUESTRA BASE DE DATOS DE NUESTRO PROYECTO
+## MOSTRANDO INSERCIONES EN NUESTRA BASE DE DATOS DE NUESTRO PROYECTO
 **InsertOne en nuestra colección usuarios**
-![inserOne](./IMG/InsertOneUsuarios.png)
+![insertOne](./IMG/InsertOneUsuarios.png)
 **InsertOne en nuestra colección de libros haciendo referencia con id del autor**
 ![insertOne](./IMG/insertOnelibros.png)
 **InsertOne en nuestra colección autores así mismo haciendo referencia al id del libro**
@@ -32,7 +32,7 @@
 **InsertOne en nuestra colección de préstamos haciendo referencia al id del libro y al id del usuario**
 ![insertOne](./IMG/insertOneprestamos.png)
 
-## MOSTRANDO INSERCCIONES MULTIPLES CON LA OPERACION INSERTMANY
+## MOSTRANDO INSERCIONES MULTIPLES CON LA OPERACIÓN INSERTMANY
 **Con el insertMany podemos insertar múltiples documentos en nuestras colecciones a continuación muestro como insertamos múltiples usuarios usando esta operación de inserción:**
 ![insertMany](./IMG/insertManyusuarios.png)
 ![insertMany](./IMG/insertManyusuarios2.png)
@@ -52,17 +52,17 @@
 **Podemos contar cuantos documentos están en nuestras colecciones con el método count**
 ![count](./IMG/count.png)
 
-## LIMITACION Y PAGINACION APLICADA EN NUESTRO PROYECTO
-**Podemos manipular el número de documentos devueltos en una consulta para limitar resultados utilizando la operación find pero con los métodos limit y skip. Puedes ver más detalladamente las consultas con estos dos métodos en nuestra carpeta `LIMITACION-PAGINACION` viene un archivo llamado `limit&skip.js` aquí en nuestro repositorio**
+## LIMITACIÓN Y PAGINACIÓN APLICADA EN NUESTRO PROYECTO
+**Podemos manipular el número de documentos devueltos en una consulta para limitar resultados utilizando la operación find pero con los métodos limit y skip. Puedes ver más detalladamente las consultas con estos dos métodos en nuestra carpeta `LIMITACIÓN-PAGINACIÓN` viene un archivo llamado `limit&skip.js` aquí en nuestro repositorio**
 **Con el método limit podemos manipular cuantos registros queremos que nos devuelva la consulta  en nuestro proyecto lo aplicamos en la colección de libros para que solo nos arrojara los primeros 3 libros**
 ![limit](./IMG/limit.png)
 **Con el método skip podemos omitir cierto número de documentos antes, skip se utiliza mucho en lo que es la paginación en nuestro proyecto hicimos que nos arrojara una consulta de omitir los dos primeros libros y en combinación con el método limit solo que nos traiga dos libros como se puede ver a continuación:**
 *Solo nos dará como resultado 2 libros*
 ![skip](./IMG/skip.png)
 
-## USO DE LA PROYECCION Y COMPARACION CONS SUS RESPECTIVOS OPERADORES APLICADOS EN NUESTRO PROYECTO
+## USO DE LA PROYECCIÓN Y COMPARACIÓN CONS SUS RESPECTIVOS OPERADORES APLICADOS EN NUESTRO PROYECTO
 **En MongoDB podemos hacer uso de la proyección y la comparación la proyección nos permite mostrar o proyectar ciertos campos de un documento con sus operadores($slice y /$) mientras que la comparación nos permite hacer varias comparaciones es decir estableciendo cierta condición que se cumpla muestre los documentos de nuestra base de datos gracias a los siguientes operadores 
-($eq,$ne,$gt,$gte,$lt,$lte), A continuación solo mostrare un ejemplo con el operador $eq, pero puedes checar la carpeta `PROYECCION-COMPARACION` dentro tenemos un archivo `preyeccion&comparacion` donde vienen los scripts de las consultas con cada uno de los operadores mencionados cada uno con su ejemplo detallado**
+($eq,$ne,$gt,$gte,$lt,$lte), A continuación solo mostrare un ejemplo con el operador $eq, pero puedes checar la carpeta `PROYECCIÓN-COMPARACIÓN` dentro tenemos un archivo `proyeccion&comparación` donde vienen los scripts de las consultas con cada uno de los operadores mencionados cada uno con su ejemplo detallado**
 #### Ejemplo de la consulta con el operador $eq donde mostraremos los libros que tengan un número de páginas igual a 464
 *Resultado de la consulta*
 ![eq](./IMG/operadaoreq.png)
@@ -74,7 +74,7 @@
 *Obtenemos el siguiente resultado el libro que contiene esos dos autores*
 ![arreglos](./IMG/op-arreglos.png)
 
-## OPERADORES LOGICOS USUADOS EN NUESTRO PROYECTO
+## OPERADORES LÓGICOS USADOS EN NUESTRO PROYECTO
 **Los operadores lógicos nos permitieron hacer consultas más específicas estableciendo ciertas condiciones estos operadores son los siguientes($and,$or,$nor y $not)**
 **Solo hare un ejemplo de un operador puedes consultar la carpeta `OPERADORES-LOGICOS` con su respectivo archivo(operadores-logicos.js) donde muestro todas las consultas realizadas a la base de datos en este proyecto y con todos los operadores lógicos que existen en MongoDB**
 **Operador $and utilizado en este proyecto como sabemos en el operador $and las dos condiciones establecidas deben cumplirse para que el operador funcione en esta ocasión vamos a realizar una consulta en la colección de autores y vamos a traer los autores que cumplan lo siguiente:**
@@ -100,21 +100,21 @@
 - Cambiaremos todos los libros que tienen como género "Novela Narrativa" por el género de simplemente "Novela"
 *Como vemos en el resultado de la consulta vemos que modifico dos libros *
 ![updateMany](./IMG/updateMany.png)
-**La tercera forma de actualizar registros en MongoDB es utilizando la operación replaceOne esta operación puede actualizar documentos pero la diferencia radica en que hay que pasar todo el objeto JSON con sus propiedades es decir tenemos que escribir todo en la siguiente actualización vamos a modificar todo un libro a través de su "isbn" anteriormente su nombre era "Clean Code" lo modificamos completamente (todos los campos fueron modificados)**
+**La tercera forma de actualizar registros en MongoDB es utilizando la operación replaceOne esta operación puede actualizar documentos pero la diferencia radica en que hay que pasar todo el objeto JSON con sus propiedades es decir tenemos que escribir todo en la siguiente actualización vamos a modificar todo un libro a través de su "ISBN" anteriormente su nombre era "Clean Code" lo modificamos completamente (todos los campos fueron modificados)**
 *vemos que tenemos que pasar todo el objeto con sus campos así también vemos que un documento ha sido modificado*
 ![replaceOne](./IMG/replaceOne.png)
 **Puedes consultar la carpeta `UPDATE` ahí encontraras 3 archivos `replaceOne.js,updateMany.js y updateOne` donde están todas actualizaciones realizadas en este proyecto cada explicada detalladamente en los archivos**
 
-## OPERADORES DE ACTUALIZACION APLICADOS EN EL PROYECTO
+## OPERADORES DE ACTUALIZACIÓN APLICADOS EN EL PROYECTO
 **Para poder aplicar actualizaciones más precisas en MongoDB necesitamos conocer sus operadores que nos permitirán hacer actualizaciones más específicas en la base de datos estos operadores son `$set,$unset,$inc,$min y $addToSet` cada de estos operadores cumple con una función específica a continuación solo relatare el uso de uno de ellos aplicado en el proyecto puedes consultar nuestra carpeta `OPERADORES-ACTUALIZACION` dentro contiene los cuatro archivos cada uno por su nombre del operador ahí esta detalladamente explicado cada uno y que actualización se hizo en el proyecto**
 **Un operador de actualización muy usado es el operador `$inc` este operador nos permite incrementar o decrementar valores numéricos uno de las actualizaciones realizadas fue  la siguiente:**
 - incrementamos el número de copias disponibles de un libro que anteriormente tenía 1 solo copia el libro fue "Cien Años De Soledad" incrementaremos el valor en 4 copias disponibles a continuación vemos como aplicamos el operador en MongoCompass
-*Como solo teniamos un copia disponible pasamos el valor 3 en el operador para que se incremente en 4 copias disponibles*
+*Como solo teníamos un copia disponible pasamos el valor 3 en el operador para que se incremente en 4 copias disponibles*
 ![incrementar](./IMG/incrementar.png)
 *Ahora consultamos el libro para ver que si tenga las 4 copias disponibles:*
 ![incrementar](./IMG/incrementar2.png)
 
-## METODOS DE ELIMINACION EN MONGODB USADOS Y APLICADOS EN NUESTRO PROYECTO
+## MÉTODOS DE ELIMINACIóN EN MONGODB USADOS Y APLICADOS EN NUESTRO PROYECTO
 **Para eliminar documentos de nuestra base de datos utilizamos 3 métodos `deleteOne` nos permite eliminar solo un documento, `deleteMany` este nos permite eliminar múltiples documentos estableciendo un filtro dado, y finalmente  el método `remove` que se utiliza para remover documentos en la base de datos este método es obsoleto en versiones de mongo antiguas pero al igual funciona**
 - delateOne: Eliminamos solo un documento de la base de datos eliminamos en la colección usuarios el usuario con nombre "Juan Ayala"
 *método aplicado en el proyecto*
@@ -133,7 +133,7 @@
 *Como se puede observar pudimos extraer el valor este caso el título de cada libro y nada más mostrar esa información así podemos utilizar  el ciclo forEach de JavaScript en nuestros documentos de Mongo igual tenemos la carpeta `RECORRIDO-JAVASCRIPT` donde se encuentra el archivo del ciclo forEach aquí en nuestro repositorio*
 ![forEach](./IMG/forEach.png)
 
-## OPTIMIZACION Y RENDIMIENTO DE LAS CONSULTAS EN NUESTRA BASE DE DATOS BIBLIOTECA USO DE PIPELINE DE AGREGACION POR ETAPAS Y SUS OPERADORES
+## OPTIMIZACIÓN Y RENDIMIENTO DE LAS CONSULTAS EN NUESTRA BASE DE DATOS BIBLIOTECA USO DE PIPELINE DE AGREGACIÓN POR ETAPAS Y SUS OPERADORES
 **Para poder optimizar el rendimiento de nuestras consultas en la base datos implementamos algunas etapas de agregación con usadas mediante Pipeline de agregación que son usados como herramientas para manipular y analizar datos de forma secuencial las etapas de agregación son 3 respectivamente: `match`,`group` y `sort` que en nuestro proyecto las utilizamos. A continuación como aplicamos las etapas en nuestro proyecto de base de datos**
 
 - Etapa match:Esta etapa nos permite filtrar documentos estableciendo una condición dada es similar al método find de MongoDB.
@@ -149,15 +149,15 @@
 **En el proyecto lo hicimos ordenando de manera alfabéticamente nuestro usuario para ordenar los usuarios de esta manera pasamos como valor el numero 1 esto le indicara a Mongo que los documentos sean ordenados de esa manera. Como se puede ver a continuación:**
 ![sort](./IMG/etapasort.png)
 
-## REALIZACION DE UN INFORME APLICANDO LAS 3 ETAPAS(match,group y sort) DE AGREGACION EN NUESTRO PROYECTO BASE DE DATOS BIBLIOTECA
+## REALIZACIÓN DE UN INFORME APLICANDO LAS 3 ETAPAS(match,group y sort) DE AGREGACION EN NUESTRO PROYECTO BASE DE DATOS BIBLIOTECA
 **Elaboramos un informe de consulta a nuestra base de datos estableciendo ciertos criterios y haciendo uso de las 3 etapas de agregación también tenemos una carpeta `INFORME-3ETAPAS`,con su archivo dentro `informeCon3Etapas` donde viene explicado detalladamente la realización de este informe**
-#### CARACTERISTICAS DEL INFORME
+#### CARACTERÍSTICAS DEL INFORME
 - El informe consiste primero en darnos el número total de préstamos por libro.
 - ordenar resultados para ver cuál fue el libro más prestado en 2026 
 - usamos match -> establecimos el campo fecha_prestamo que tiene que ser mayor o igual a 01/01/2026.
 - usamos group -> para agrupar los libros dependiendo del número de préstamos aquí sumamos las veces que sea prestado cada uno de los libros.
 - usamos sort -> para ordenar lo hicimos de manera descendente es decir de mayor a menor aquí nos dirá cuál es el libro más prestado y cual tiene menos prestamos en nuestra base de datos.
-*Aquí muestro la consulta realizada en el proyecto con las 3 etapas de agregacion.*
+*Aquí muestro la consulta realizada en el proyecto con las 3 etapas de agregación.*
 ![informe](./IMG/informe.png)
 *Resultado de la consulta del informe mostrando el número de veces que se prestó cada uno de los libros*
 ![resultado](./IMG/resultadoInforme.png)
@@ -166,8 +166,8 @@
 **Para la optimización de consultas en nuestra base de datos Mongo vamos a crear índices de consultas a continuación los tipos de índices que se crearon en nuestra base de datos, también puedes verlos más detalla mente en nuestra carpeta `INDICES-MONGO` dentro vienen por archivos cada uno de los índices creados en nuestra base de datos cada uno por su nombre del índice.**
 
 - Index Único -> Este índice garantiza que no necesitamos dos documentos con el mismo valor en un campo indexado previene la duplicación.
-*Índice único aplicado a la colección de libros a través como campo único el isb*
-![indiceUnico](./IMG/indiceUnico.png)
+*Índice único aplicado a la colección de libros a través como campo único el isbn*
+![indiceUnico](./IMG/indice-Unico.png)
 
 - Índice Compuesto -> Este índice abarca más de un campo simultáneamente mejorando el rendimiento de consultas que filtran por múltiples campos.
 *creamos un índice compuesto en la colección de libros relacionando con el género y el idioma del libro*
@@ -190,8 +190,71 @@
 ![listar](./IMG/listarIndices.png)
 
 ## BORRADO DE INDICES
-*Para borrar índices de la base de datos podemos aplicar el comando dopr.Index(<nombre_del_indice>), puedes checar el archivo `IndicesComandos` dentro de la misma carpeta `INDICES-MONGO`.*
+*Para borrar índices de la base de datos podemos aplicar el comando drop.Index(<nombre_del_indice>), puedes checar el archivo `IndicesComandos` dentro de la misma carpeta `INDICES-MONGO`.*
 ![borradoIndices](./IMG/borradoIndices.png)
+
+## APLICANDO INDICE DE TEXTO EN LA BASE DE DATOS MONGODB
+**Ahora vamos a realizar varios tipos de búsquedas para aplicar este tipo de índice he creado una carpeta llamada `APLICANDO-INDICES` dentro un archivo javaScript con el nombre de `Aplicando-indice-texto` donde contiene todos los script para realizar las todas la búsquedas que iré mencionando**
+
+1. Búsqueda Básica
+**Esta búsqueda nos permite traer los libros por su nombre usando el operador $text y el operador $search en el archivo `aplicando-indice-texto` explico detalladamente este tipo de búsqueda puedes consultarlo, a continuación la ejecución de nuestra búsqueda en la base de datos, traemos el libro por su nombre:**
+![index-texto](./IMG/busqueda-basica.png)
+
+2. Búsqueda de frases exactas
+**Este tipo de búsqueda nos permite buscar por una frase exacta, aplicando nuestro indice de texto y usando una sintaxis especial que explico en el archivo `aplicando-indice-texto`, esta búsqueda nos va permitir traer los libros por una frase exacta con respecto al nombre del libro como se puede apreciar a continuación la búsqueda por frases exactas en la base de datos:**
+![index-texto](./IMG/frase-exacta.png)
+
+3. Búsqueda para excluir palabras especificas
+**Este tipo de búsquedas nos permite excluir palabras a la hora de realizar una búsqueda, en nuestro caso la consulta no devuelve nada ya que colocamos una palabra relacionada con el nombre del libro como se puede apreciar a continuación:**
+![index-texto](./IMG/excluir-palabras.png)
+
+4. Búsqueda por relevancia y puntuación /Score
+**Esta búsqueda nos permite traer los libros por relevancia cuando colocamos una palabra usando `textScore` para ver la puntuación de relevancia que tiene esa palabra en el título del libro acompañado del operador `$meta` en mi archivo `Aplicando-indice-texto` ahi explico a detalle como realize este tipo de búsqueda en la base de datos, a continuación ejecutando la búsqueda por relevancia así como su puntuación:**
+![index-texto](./IMG/text-score.png)
+
+## APLICANDO INDICE DE TIPO ÚNICO EN LA BASE DE DATOS MONGODB
+**Este tipo de índice sirve para evitar documentos duplicados en la base de datos, en nuestro caso creamos índice en la colección de libros aplicándolo en el campo `isbn` para evitar que se insertaran libros con el mismo isbn ya que eso no puede ser posible, ademas manejamos el error a través de código JavaScript con un `try y catch`, a continuación mostrare como llevamos la aplicación de este índice puedes consultar el código del script en nuestra archivo que creamos llamado `Aplicando-indice-unico.js` donde explico mas a detalle todo el proceso**
+
+**Mostrando error de  duplicado cuando tratamos de insertar un libro con el mismo isbn:**
+![error](./IMG/error-11000-db.png)
+
+**Manejando el error con try y catch vemos como aplicamos el código para manejar estos tipos de errores(11000) en nuestra base de datos:**
+![try-catch](./IMG/try-catch-js.png)
+
+**Ahora vemos como podemos insertar el libro con otro isbn que no exista en la base de datos:**
+![try-catch](./IMG/try-catch-js2.png)
+
+**Como último paso verificamos que el libro este realmente en nuestra colección de libros:**
+![libro-insertado](./IMG/libro-insertado.png)
+
+## APLICANDO INDICE DE TIPO CAMPO ÚNICO EN LA BASE DE DATOS MONGODB
+**Para aplicar este índice vamos a realizar la consulta primero que consiste en analizar los documentos que cumplan con la condición que es traer todos prestamos de los libros que se hicieron a partir de la fecha 2026-01-28 es decir todos los prestamos de lo que va del 2026, aquí ya usaremos en comando distinto que es explain("executionStats") lo interesante es que veremos la optimización de esta consulta a partir de la creación y aplicación del índice de campo único como otras propiedades avanzadas que podemos ver con este comando**
+
+**Vamos a usar explain para analizar el ParsedQuery que nos dirá a que campo de la colección se le estará aplicando la condición establecida, puedes checar mi archivo `Aplicando-indice-campo-unico.js` ,donde explico mas detalladamente que podemos analizar cuando ejecutamos este comando a continuación vemos como aplicamos explain en mongodb para analizar el ParsedQuery:**
+![parsed-query](./IMG/parsedQuery.png)
+
+**Ahora vamos analizar que se este aplicando el índice de campo único a través del IXSCAN se encuentra en el apartado winningPlan:
+![IXSCAN](./IMG/IXSCAN.png) 
+
+**Analizando con la propiedad de mongodb executionStats ver la cantidad de documentos encontrados a partir de nuestra condición que se estableció los prestamos de los libros a partir de esa fecha:**
+![doc-analizados](./IMG/doc-analizados.png)
+
+**Podemos ver también el filtro que se aplica y a que base de datos se está aplicando la consulta todo esto en el apartado command, como se ve a continuación:**
+![command](./IMG/command.png)
+
+**Por último podemos ver la información del servidor como en que puerto y host se esta ejecutando MongoDB, además la versión con la que se esta trabajando todo esto en el apartado serverInfo:**
+![server-info](./IMG/server-info.png)
+
+## APLICANDO INDICE COMPUESTO EN LA BASE DE DATOS MONGODB
+**Aplicamos nuestro indice compuesto ya que fue creado en la colección de libros en los campos género e idioma, podemos realizar búsquedas pasado los dos campos como se muestra a continuación:**
+![index.compuesto](./IMG/dos-campos.png)
+
+**Ahora también el índice funciona si solo pasamos un solo campo es este caso buscamos por género nada mas:**
+![index-compuesto](./IMG/un-solo-campo.png)
+
+**Analizamos que el índice se estuviera aplicando con explain,recordamos que podemos encontrar los scripts de este índice en al archivo llamado `Aplicando-indice-compuesto` dentro de su carpeta `APLICANDO-INDICES`:**
+![index-compuesto](./IMG/explain.png)
+
 
 ### Lista De Tecnologías, Propiedades De MongoDB Como Nuestro Servidor De Base De Datos Y Herramientas Usadas En Nuestro Proyecto(Base De Datos Biblioteca)  
 
@@ -230,8 +293,10 @@
 33. Pipeline De Agregación
 34. Recorrido De Documentos(forEach)
 35. Método De Cursor(pretty())
-36. Método Count En Mongo 
-37. Git-Hub
+36. Método Count En Mongo
+37. Aplicación De Los Tipos De Índices
+38. Análisis Y Optimización De Consultas Con explain("executionStats")
+39. Git-Hub
 
 ### *Elaborado Por: Mario Martínez Aguilar*
 
