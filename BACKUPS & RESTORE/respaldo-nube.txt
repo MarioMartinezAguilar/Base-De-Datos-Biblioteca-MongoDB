@@ -1,0 +1,66 @@
+*Ahora vamos a crear un respaldo  pero esta vez
+Sera en la nube en la plataforma Backblaze B2
+-> Para hacer este respaldo tenemos que tener una cuenta ya creada
+en esta plataforma teniendo eso en cuenta lo primero que haremos 
+sera crear un Bucket de almacenamiento puedes 
+verificar el README en la parte respaldos donde explico
+parte por parte como se crea un bucket en la plataforma
+
+-> Después de eso creamos nuestras llaves para conectar nuestra terminal
+ala la nube de Backblaze, también en el README explico como hacer eso puedes verificarlo.
+
+-> Ahora tenemos que hacer una configuración especial para poder utilizar los comandos
+de B2 en nuestra computadora eso también esta en el README explicado.
+
+-> Ahora si vamos a iniciar sesión conectaron nuestras credenciales es decir nuestra llaves 
+para eso ejecutamos el siguiente comando:
+-> b2 authorize-account <tu_Key_ID> <tu_Application_Key>
+
+-> Siguiente paso es empaquetar el respaldo en un archivo de compresión binaria
+-> Usando las banderas --archive --gzip
+-> comando: mongodump --db Biblioteca --gzip --archive="./respaldo_biblioteca.gz"
+
+-> Siguiente paso ahora vamos a mandar el respaldo a la 
+nube en nuestro bucket de almacenamiento con el siguiente comando:
+-> Comando: b2 file upload Biblioteca-Mongo "./respaldo_biblioteca.gz" "respaldo_biblioteca.gz"
+
+-> Ahora podemos tenerlo ahi para utilizarlo para la restauración para eso vamos a tener 
+que descargar el archivo de la nube usando el siguiente comando:
+Comando: b2 file download b2://Biblioteca-Mongo/respaldo_biblioteca.gz "./respaldo_descargado.gz"
+*NOTA:* Aquí podemos darle el nombre que nosotros queramos al archivo que se descargara en la
+parte final del comando. Deben coincidir el nombre del bucket y el archivo dentro del bucket
+
+-> Finalmente hacemos la restauración con mongorestore todo esto como sabemos debe estar apuntando 
+en la terminal a donde tenemos nuestro archivo ya descargado:
+Comando: mongorestore --gzip --archive="./respaldo_descargado.gz"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

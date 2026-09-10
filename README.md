@@ -233,7 +233,7 @@
 **Vamos a usar explain para analizar el ParsedQuery que nos dirá a que campo de la colección se le estará aplicando la condición establecida, puedes checar mi archivo `Aplicando-indice-campo-unico.js` ,donde explico mas detalladamente que podemos analizar cuando ejecutamos este comando a continuación vemos como aplicamos explain en mongodb para analizar el ParsedQuery:**
 ![parsed-query](./IMG/parsedQuery.png)
 
-**Ahora vamos analizar que se este aplicando el índice de campo único a través del IXSCAN se encuentra en el apartado winningPlan:
+**Ahora vamos analizar que se este aplicando el índice de campo único a través del IXSCAN se encuentra en el apartado winningPlan:**
 ![IXSCAN](./IMG/IXSCAN.png) 
 
 **Analizando con la propiedad de mongodb executionStats ver la cantidad de documentos encontrados a partir de nuestra condición que se estableció los prestamos de los libros a partir de esa fecha:**
@@ -254,6 +254,143 @@
 
 **Analizamos que el índice se estuviera aplicando con explain,recordamos que podemos encontrar los scripts de este índice en al archivo llamado `Aplicando-indice-compuesto` dentro de su carpeta `APLICANDO-INDICES`:**
 ![index-compuesto](./IMG/explain.png)
+
+## 💾 Gestión de Respaldos y Restauración (Backups & Restore)
+**En esta sección se detallan los dos métodos implementados para asegurar la integridad de los datos de nuestra base de datos de la biblioteca: un respaldo físico local y un respaldo  en la nube.**
+
+### MÉTODO 1: Respaldo Físico (Unidad de Almacenamiento Externa / USB) 💽
+**Este proceso exporta los datos de la aplicación en archivos BSON/JSON para poder moverlos y resguardarlos en un dispositivo físico.**
+
+#### Pasos para realizar el respaldo:
+
+1. Conecta tu unidad de almacenamiento física a la computadora.
+2. Abre la consola y ejecuta el siguiente comando apuntando a la ruta de tu disco externo:
+
+```bash
+   mongodump --db nombre_de_tu_base_de_datos --out "D:\Ruta_De_Tu_Unidad_Fisica\Backups"
+ ```
+*(Cambia `D:` por la letra que tenga asignada tu unidad física y `nombre_de_tu_base_de_datos` por la tuya).*
+
+#### Aquí ejecutamos el comando mongodump para realizar el respaldo físico
+![mongodump](./IMG/mongodump.png)
+
+#### Vemos que nuestro respaldo se creo en la memoria podemos observar los archivos JSON Y BSON de nuestra base de datos de la Biblioteca
+![JSON-BSON](./IMG/JSON-BSON.png)
+
+#### Ahora hacemos una prueba definitiva borramos nuestra base de datos actual para después hacer la restauración
+![borrado-db](./IMG/borrado-Db.png)
+
+#### Pasos para la Restauración:
+
+1. Asegúrate de tener conectada la unidad con el respaldo.
+2. Ejecuta el comando apuntando a la carpeta de la base de datos respaldada:
+```bash
+   mongorestore --db nombre_de_tu_base_de_datos "D:\Ruta_De_Tu_Unidad_Fisica\Backups\nombre_de_tu_base_de_datos"
+```
+#### Ejecutamos el comando mongorestore para hacer nuestra restauración de la base de datos como se observa a continuación
+![mongorestore](./IMG/mongorestore.png)
+
+#### Finalmente comprobamos que nuestra base de datos vuelve estar en el servidor con toda nuestra información respaldada
+![COMPROBANDO-DB](./IMG/comprobando-DB.png)
+
+### MÉTODO 2: Respaldo en la Nube (Backblaze B2) ☁️
+**Este proceso describe cómo configurar el almacenamiento en la nube desde cero, habilitar la consola globalmente y subir las copias de seguridad comprimidas en formato `.gz` para tener redundancia y protección ante fallos de hardware.**
+
+#### 🛠️ 1. Configuración Inicial en la Web de Backblaze:
+* **Crear el Bucket:** Inicia sesión en Backblaze, ve a **B2 Cloud Storage > Buckets**, haz clic en **Create a Bucket**, asígnale el nombre `Biblioteca-Mongo`, configúralo como *Private* (Privado) y créalo.
+
+**Aquí vemos a continuación como creamos el bucket y le asignamos un nombre para mi caso fue `Biblioteca-Mongo` y de manera privada:**
+![bucket](./IMG/bucket.png)
+
+**Bucket listo para ser usado**
+![bucket](./IMG/bucket-listo.png)
+
+* **Generar las Llaves de Acceso:** En el menú ve a **Application Keys**, haz clic en **Add a New Application Key**, dale permisos de lectura y escritura (*Read and Write*) y copia tu **`Key ID`** y tu **`Application Key`** en un lugar seguro.
+
+**Como podemos ver aquí asigne un nombre le di permisos de lectura y escritura ademas seccione el nombre de mi bucket le damos clic para que nos genere las llaves se aparecerá una ventana donde nos da las dos llaves solicitadas, a continuación muestra el momento en creo las llaves de acceso. Solo pondré el momento donde le di permisos y cuando la llave se creo correctamente no coloco mis llaves porque deben ser seguras para cada quien:**
+![keys](./IMG/keys.png)
+
+**Nuestras llaves creadas correctamente**
+![keys](./IMG/key_id.png)
+
+#### 💻 2. Configuración del CLI en la Consola (Hacer `b2` global):
+**Para poder usar los comandos de Backblaze desde cualquier carpeta de la terminal, se realiza lo siguiente:**
+1. Descarga el ejecutable `b2.exe`.
+2. Muévalo dentro de la carpeta de herramientas de MongoDB que ya está en el Path del sistema:
+   * Ruta: `C:\Program Files\MongoDB\Tools\100\bin`
+
+#### 🚀 3. Pasos para realizar el respaldo por Consola:
+**Ahora si vamos a realizar nuestro respaldo para mandarlo a la nube asi que primero:**
+
+1. Inicia sesión en Backblaze desde tu terminal ejecutando tus credenciales (solo se hace la primera vez):
+```bash
+    b2 authorize-account <tu_Key_ID> <tu_Application_Key>
+```
+**Vemos como nos conectamos a la nube de Backblaze al ejecutar el comando nos tiene que dar la siguiente información de acceso:**
+![session](./IMG/sesion.png)
+
+2. Genera el respaldo de MongoDB comprimido en un solo archivo único `.gz` a esto se le conoce como flags de optimización binaria aplicamos el comando con mongodump:
+```bash
+   mongodump --db Biblioteca --gzip --archive="./respaldo_biblioteca.gz"
+```
+**Vemos como empaquetamos nuestro respaldo para mandarlo a la nube:**
+![mongodump-nube](./IMG/mongodump-binario.png)
+
+3. Sube tu archivo comprimido al contenedor de Backblaze ejecutando el comando de subida:
+```bash
+   b2 file upload Biblioteca-Mongo "./respaldo_biblioteca.gz" "respaldo_biblioteca.gz"
+```
+**Aquí ejecutamos el comando para subir nuestro respaldo comprimido a la nube:**
+![subida-nube](./IMG/subida-nube.png)
+
+**Verificamos que nuestro respaldo comprimido ya este en la nube:**
+![comprobación](./IMG/bucket-respaldo.png)
+
+**Hicimos una prueba final real para ver si todo funciono correctamente, borramos la base  de datos simulando perder la información:**
+![borrado](./IMG/borrado-nubeDB.png)
+
+#### 🔄 4. Pasos para la Restauración desde la nube:
+1. Descarga el archivo comprimido desde tu Bucket de Backblaze a tu computadora:
+```bash
+   b2 file download b2://Biblioteca-Mongo/respaldo_biblioteca.gz "./respaldo_descargado.gz"
+```
+**Vemos como se descarga nuestro respaldo lo traemos desde la nube:**
+![descarga](./IMG/descarga-nube.png)
+
+**Verificamos que se hall descargado el archivo comprimido:**
+![descarga](./IMG/comprobando-descarga.png)
+
+2. Aplica la restauración directa del archivo comprimido en tu MongoDB local usando `mongorestore`:
+```bash
+   mongorestore --gzip --archive="./respaldo_descargado.gz"
+```
+
+**Vemos como nuestra base de datos ya es restaurada nuevamente:**
+![restauración-final](./IMG/restauracion-final.png)
+
+**Comprobación final vemos que nuestra base  de datos se restauro exitosamente:**
+![comprobación-final](./IMG/verificacion%20final.png)
+
+## 🤖 5. Automatización del proceso con Script de Windows (Opcional):
+**Para facilitar el proceso diario, se creó un script ejecutable que comprime la base de datos y la sube a la nube de Backblaze de forma automática con un solo clic.**
+
+1. Aquí en la carpeta `BACKUPS & RESTORE` del proyecto se encuentra el archivo `respaldar.bat` donde tiene las instrucciones precisas para realizar el respaldo para la nube puedes chocarlo y analizarlo.
+
+2. Para ejecutar el respaldo automático, simplemente haz **doble clic** sobre el archivo desde el Explorador de archivos de Windows.
+
+*Nota: El script utiliza comandos Batch y se encarga de mostrar el progreso en tiempo real hasta confirmar la subida al 100%.*
+
+#### Vista previa del script realizado
+![script](./IMG/script-respaldar.png)
+
+#### Vista previa de su funcionamiento a la hora de ejecutarlo
+![script](./IMG/ejecutando-script.png)
+
+#### Vemos como hace todo el proceso automáticamente:
+![script](./IMG/ejecutando-script2.png)
+
+#### Finalmente comprobamos que nuestro respaldo si se sube automáticamente con ese script.
+![script](./IMG/comprobacion-script.png)
 
 
 ### Lista De Tecnologías, Propiedades De MongoDB Como Nuestro Servidor De Base De Datos Y Herramientas Usadas En Nuestro Proyecto(Base De Datos Biblioteca)  
@@ -296,7 +433,11 @@
 36. Método Count En Mongo
 37. Aplicación De Los Tipos De Índices
 38. Análisis Y Optimización De Consultas Con explain("executionStats")
-39. Git-Hub
+39. MongoDump Respaldos
+40. MongoRestore Restauración
+41. Infraestructura Y Autenticación En La Nube Con Backblaze B2
+42. Manejo De Scripts De Automatización Para Respaldos en Windows 
+43. Git-Hub
 
 ### *Elaborado Por: Mario Martínez Aguilar*
 

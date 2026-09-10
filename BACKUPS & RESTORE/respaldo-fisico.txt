@@ -1,0 +1,63 @@
+// Vamos a realizar un respaldo de manera física de 
+// nuestra base de datos MongoDB utilizando herramientas como lo es mongodump
+//y mongorestore que nos van a permitir realizar nuestros respaldos de manera
+//física y eficiente, cabe señalar que estas herramientas tenemos que descargarlas:
+
+//para realizar un respaldo físico tenemos que elegir nuestra
+//unidad de almacenamiento Externa en este caso sera un USB
+//Ahora teniendo eso en cuenta y que conectamos nuestra unidad a nuestro equipo
+//implementaremos el siguiente comando en nuestra terminal:
+
+=> mongodump --db nombre_de_tu_base_de_datos --out "D:\Ruta_De_Tu_Unidad_Fisica\Backups"
+
+//Aplicamos mongodump para realizar el respaldo como vemos le decimos
+// a mongodump que elija un nombre de la base de datos, con la bandera --db es donde 
+//se guardara el respaldo podemos darle el nombre que queramos, 
+//después con la bandera  --out decimos la ruta de nuestra unidad de almacenamiento
+// que es la memoria USB como vemos le coloca la letra D y yo
+// en este caso cree una carpeta en la memoria usb que se 
+//llama Backups y listo con eso tendremos ya el respaldo en la memoria
+//cuando termine el comando veremos ya nuestros archivos JSON y BSON
+// en nuestra memoria usb dentro de nuestra carpeta backups que creamos.
+
+//Ahora supongamos que nuestra base de datos se arruino y queremos restaurarla
+//con ese respaldo que creamos con mongodump en nuestra USB
+
+=> Aquí aplicaremos el comando de restauración con mongorestore
+que es el siguiente:
+
+=> mongorestore --db nombre_de_tu_base_de_datos "D:\Ruta_De_Tu_Unidad_Fisica\Backups\nombre_de_tu_base_de_datos"
+
+tenemos que conectar nuestra USB a nuestro equipo una vez hecho eso 
+ejecutas el comando le decimos a mongorestore que restaure la base de datos
+con la bandera --db le damos el nombre a la base de datos luego colocamos
+la ruta de la memoria USB donde tenemos el backup listo por lo general
+se crea una carpeta con el nombre que le dimos a la base de datos cuando 
+ejecutamos el mongodump y con eso habremos restaurado nuestra base de datos
+
+*NOTA: para ejecutar estos comandos de mongodump y mongorestore
+tenemos que tener nuestro servidor corriendo de mongo*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+
+
+   
+
+
+
+ 
