@@ -432,24 +432,23 @@
 ### 🔓 3. Conexión Segura al Servidor
 **Una vez blindado el sistema, el acceso tanto visual como por terminal requiere la cadena de autenticación apuntando a la base de datos de origen (`admin`):**
 
-**Primero nos conectaremos por la consola de comandos utilizando el siguiente comando:**
-*   **Por Consola (Mongo Shell):**
-    ```bash
-      mongosh -u "tu_usuario_admin" -p "tu_contraseña_segura" --authenticationDatabase "admin"
-   ```
+1. **Primero nos conectaremos por la consola de comandos utilizando el siguiente comando:**
+**Por Consola (Mongo Shell):**
+```bash
+   mongosh -u "tu_usuario_admin" -p "tu_contraseña_segura" --authenticationDatabase "admin"
+```
+
 **Vista previa de la conexión por consola de comandos cuando ejecutamos el comando anterior posteriormente nos pedirá la contraseña**
 
 ![connection-mongo-shell](./IMG/conexion-mongoshell.png)
 
-*   **Por Interfaz Visual (MongoDB Compass):** **Se configuró la sección *Authentication* en modo *Username / Password*, especificando el usuario, contraseña y definiendo `admin` como la *Authentication Database***.
+2. **Por Interfaz Visual (MongoDB Compass):** **Se configuró la sección *Authentication* en modo *Username / Password*, especificando el usuario, contraseña y definiendo `admin` como la *Authentication Database***.
 
 **Vista previa de la conexión con interfaz gráfica de mongoDB Compass**
 ![connection-mongoCompass](./IMG/conexion-mongoCompass.png)
 
 **Vemos que nos conectamos a las base de datos del servidor**
 ![conectado-db](./IMG/conectado-bds.png)
-
-
 
 
 ### Lista De Tecnologías, Propiedades De MongoDB Como Nuestro Servidor De Base De Datos Y Herramientas Usadas En Nuestro Proyecto(Base De Datos Biblioteca)  
