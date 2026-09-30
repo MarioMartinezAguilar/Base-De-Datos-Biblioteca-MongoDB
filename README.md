@@ -357,7 +357,7 @@
 **Vemos como se descarga nuestro respaldo lo traemos desde la nube:**
 ![descarga](./IMG/descarga-nube.png)
 
-**Verificamos que se hall descargado el archivo comprimido:**
+**Verificamos que se halla descargado el archivo comprimido:**
 ![descarga](./IMG/comprobando-descarga.png)
 
 2. Aplica la restauración directa del archivo comprimido en tu MongoDB local usando `mongorestore`:
@@ -391,6 +391,65 @@
 
 #### Finalmente comprobamos que nuestro respaldo si se sube automáticamente con ese script.
 ![script](./IMG/comprobacion-script.png)
+
+
+## 🔒 Seguridad y Autenticación en MongoDB (Local)
+**Como parte de las buenas prácticas de infraestructura y protección de datos, la base de datos local fue configurada para operar bajo un entorno seguro, restringiendo el acceso abierto por defecto  e implementando el control de accesos por roles (RBAC).**
+
+**Para realizar este proceso tenemos que seguir los siguientes pasos:**
+
+### 👥 1. Creación del Usuario Administrador
+**Se inicializó el sistema y, a través de la base de datos de control `admin`, se generó un superusuario con permisos totales de lectura, escritura y gestión de otros usuarios en todo el servidor: puedes encontrar todo el código para crear el usuario administrador en la carpeta `SEGURIDAD-MONGO` en su archivo `seguridad-mongo.js`, donde se explica a detalle parte de este proceso y los permisos asi como sus propiedades que debemos tener encuenta, a continuación colocare el script para crear el usuario administrador**
+
+```JavaScript
+   use admin
+
+   db.createUser({
+      user: "tu_usuario_admin",
+      pwd: "tu_contraseña_segura",
+      roles: [
+         { role: "userAdminAnyDatabase", db: "admin" },
+         { role: "readWriteAnyDatabase", db: "admin" }
+      ]
+   })
+```
+**Vista previa del usuario creado en MongoDB Compass:**
+![usuario-mongo](./IMG/usuario-compass.png)
+
+**Comprobando que nuestro usuario se creo correctamente con el comando `db.getUsers()`**
+![usuario](./IMG/get-usuarios.png)
+
+### 🔑 2. Activación del Candado de Seguridad (`--auth`)
+**Para forzar a MongoDB a exigir credenciales en cada conexión y restringir accesos no autorizados, el servidor se inicializa utilizando el parámetro de autenticación:**
+
+**Arrancamos el servidor de mongo con el candado de autenticación:**
+```bash
+   mongod --auth
+```
+**Arrancando el servidor con el candado de autenticación seguro**
+![mongo-auth](./IMG/mongo-auth.png)
+
+### 🔓 3. Conexión Segura al Servidor
+**Una vez blindado el sistema, el acceso tanto visual como por terminal requiere la cadena de autenticación apuntando a la base de datos de origen (`admin`):**
+
+**Primero nos conectaremos por la consola de comandos utilizando el siguiente comando:**
+*   **Por Consola (Mongo Shell):**
+    ```bash
+      mongosh -u "tu_usuario_admin" -p "tu_contraseña_segura" --authenticationDatabase "admin"
+   ```
+**Vista previa de la conexión por consola de comandos cuando ejecutamos el comando anterior posteriormente nos pedirá la contraseña**
+
+![connection-mongo-shell](./IMG/conexion-mongoshell.png)
+
+*   **Por Interfaz Visual (MongoDB Compass):** **Se configuró la sección *Authentication* en modo *Username / Password*, especificando el usuario, contraseña y definiendo `admin` como la *Authentication Database***.
+
+**Vista previa de la conexión con interfaz gráfica de mongoDB Compass**
+![connection-mongoCompass](./IMG/conexion-mongoCompass.png)
+
+**Vemos que nos conectamos a las base de datos del servidor**
+![conectado-db](./IMG/conectado-bds.png)
+
+
 
 
 ### Lista De Tecnologías, Propiedades De MongoDB Como Nuestro Servidor De Base De Datos Y Herramientas Usadas En Nuestro Proyecto(Base De Datos Biblioteca)  
@@ -436,7 +495,9 @@
 39. MongoDump Respaldos
 40. MongoRestore Restauración
 41. Infraestructura Y Autenticación En La Nube Con Backblaze B2
-42. Manejo De Scripts De Automatización Para Respaldos en Windows 
+42. Manejo De Scripts De Automatización Para Respaldos en Windows
+43. Creación De Usuarios Y Administración De Roles
+44. Seguridad Y Autenticación En MongoDB(auth)
 43. Git-Hub
 
 ### *Elaborado Por: Mario Martínez Aguilar*

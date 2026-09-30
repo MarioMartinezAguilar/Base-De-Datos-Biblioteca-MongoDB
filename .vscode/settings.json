@@ -23,13 +23,16 @@
         "activityBarTop.inactiveForeground": "#e7e7e799",
         "commandCenter.foreground": "#e7e7e7",
         "statusBar.debuggingBackground": "#832561",
-        "statusBar.debuggingForeground": "#e7e7e7"
+        "statusBar.debuggingForeground": "#e7e7e7",
+        "activityBar.activeBorder": "#e7e7e7",
+        "activityBarTop.activeBorder": "#e7e7e7"
     },
     "peacock.color": "#832561",
     "cSpell.words": [
         "ACTUALIZACION",
         "AGREGACION",
         "asígnale",
+        "autenticarnos",
         "AUTOMATICO",
         "Backblaze",
         "Campounico",
@@ -37,6 +40,7 @@
         "coleccion",
         "configúralo",
         "decrementar",
+        "encuenta",
         "EXITO",
         "findquery",
         "Fisica",
@@ -47,6 +51,7 @@
         "IXSCAN",
         "logicos",
         "LOGICOS",
+        "mario",
         "Millis",
         "prestamo",
         "proyeccion",
